@@ -1,14 +1,7 @@
 <div #navbar class="fixed w-full shadow-md z-50">
 	<p-toolbar *ngIf="loggedin">
-		<div class="p-toolbar-group-left" style="width: 140px;">
-			<div class="ml-2 flex flex-row" style="margin-left: 0px; margin-right: 5px;">
-				<a [routerLink]="['/home']">
-					<div pRipple class="indigo mr-2 flex items-center justify-center">
-						<img *ngIf="language == 'hr'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoHR.png" />
-						<img *ngIf="language == 'en'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoEN.png" />
-					</div>
-				</a>
-			</div>
+		<div class="p-toolbar-group-left" style="width: 140px">
+			<div class="text-lg dark:text-gray-50">Code library</div>
 		</div>
 		<div class="flex flex-row items-center">
 			<ng-container *ngFor="let item of mainNavItems">
@@ -28,7 +21,7 @@
 			<div class="flex flex-row items-start justify-evenly">
 				<div *ngIf="!hamburgerItems?.length && showUpute === true" class="flex items-center justify-center" title="{{ 'UPUTE' | translate }}">
 					<div (click)="uputeDownload()" class="rounded-full select-none dark:bg-indigo-500 dark:hover:bg-indigo-600 bg-indigo-600 py-2 px-3 leading-7 text-white mr-2 cursor-pointer transition-colors hover:bg-indigo-500">
-						<i class="pi pi-file"></i>						
+						<i class="pi pi-file"></i>
 					</div>
 				</div>
 				<div class="flex items-center justify-center">
