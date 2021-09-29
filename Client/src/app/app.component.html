@@ -1,0 +1,25 @@
+<div class="pb-16 bg-white dark:bg-gray-900">
+	<app-nav></app-nav>
+	<!-- <div class="max-w-screen-2xl p-4 mx-auto"> -->
+</div>
+<div data-scroll-container [@routerTransition]="getState(o)">
+	<div class="app-wrap" #scrollContent>
+		<div>
+			<router-outlet #o="outlet"></router-outlet>
+		</div>
+	</div>
+	<app-footer></app-footer>
+</div>
+<p-toast key="globalToast" position="bottom-left" [style]="{'white-space': 'pre-line' }"></p-toast>
+
+<p-confirmDialog key="globalConfirm" class="globalConfirm" #cd [style]="{ minWidth: '50vw', maxWidth: '85vw' }">
+	<ng-template pTemplate="header">
+		<h3>{{ cd.confirmation.header }}</h3>
+	</ng-template>
+	<ng-template pTemplate="footer">
+		<button type="button" pButton icon="pi pi-check" [label]="cd.confirmation.acceptLabel" (click)="cd.accept()"></button>
+		<button type="button" pButton icon="pi pi-times" class="p-button-text" [label]="cd.confirmation.rejectLabel" (click)="cd.reject()"></button>
+	</ng-template>
+</p-confirmDialog>
+<ngx-ui-loader></ngx-ui-loader>
+<p-scrollTop styleClass="custom-scrolltop"></p-scrollTop>

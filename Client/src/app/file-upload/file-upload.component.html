@@ -1,0 +1,32 @@
+<ng-container *ngIf="asDialog == false" [ngTemplateOutlet]="uploadBodyRef"></ng-container>
+
+<p-dialog *ngIf="asDialog" [header]="header" [(visible)]="visible" [modal]="true">
+	<ng-container [ngTemplateOutlet]="uploadBodyRef"></ng-container>
+</p-dialog>
+
+<ng-template #uploadBodyRef>
+	<ng-container *ngIf="basic == true; else fullUploadRef">
+		<ng-container *ngIf="icon == true; else basicUploadRef">
+			<div class="flex flex-row items-center justify-start w-full sm:w-auto">
+				<p-fileUpload #basicUploader [class]="'icon-view ' + class"  [chooseIcon]="chooseIcon" mode="basic" name="demo" [accept]="acceptTypes" [maxFileSize]="size" (onUpload)="onUpload($event)" [customUpload]="true" (uploadHandler)="handleUpload($event)" [auto]="true"></p-fileUpload>
+			</div>
+		</ng-container>
+		
+	</ng-container>
+</ng-template>
+
+<ng-template #basicUploadRef>
+	<div class="flex flex-row items-center justify-start w-full sm:w-auto">
+		<p-fileUpload #basicUploader [class]="'basicUploader ' + class"  [chooseIcon]="chooseIcon" mode="basic" name="demo" [accept]="acceptTypes" [maxFileSize]="size" (onUpload)="onUpload($event)" [customUpload]="true" (uploadHandler)="handleUpload($event)" [auto]="true" [chooseLabel]="header"></p-fileUpload>
+	</div>
+</ng-template>
+
+<ng-template #fullUploadRef>
+	<p-fileUpload #uploader  [style]="{ minWidth: '50vw' }" name="demo" [customUpload]="true" (uploadHandler)="handleUpload($event)" (onUpload)="onUpload($event)" [multiple]="multiple" [accept]="acceptTypes" [maxFileSize]="size">
+		<ng-template pTemplate="content">
+			<ul *ngIf="uploadedFiles.length">
+				<li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+			</ul>
+		</ng-template>
+	</p-fileUpload>
+</ng-template>

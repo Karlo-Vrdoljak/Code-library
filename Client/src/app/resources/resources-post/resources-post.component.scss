@@ -1,0 +1,45 @@
+.contentContainer {
+    display: flex;
+    flex: 1 1 100%;
+    flex-direction: column;
+}
+
+.replyContainer:hover {
+    border-radius: 3px;
+}
+
+.commentMinWidth {
+    min-width: 200px;
+}
+
+.commentAreaMaxWidth {
+    max-width: 300px;
+}
+
+.threadLineContainer {
+    top: 55px;
+    height: calc(100% - 55px);
+    width: 20px;
+    .threadLine {
+        border-right: 3px solid #bfbfbf;
+        display: block;
+        height: 100%;
+        cursor: pointer;
+        background-clip: padding-box;
+    }
+
+    .threadLine:hover {
+        opacity: 0.5;
+    }
+}
+
+.replyButtonContainer {
+    ::ng-deep {
+        .p-button {
+            height: 30px;
+            width: 100px;
+        }
+    }
+}
+
+

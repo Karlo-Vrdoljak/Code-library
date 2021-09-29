@@ -1,0 +1,43 @@
+.p-datepicker-year {
+	position: relative;
+	font-family: inherit;
+	background-color: transparent;
+	min-width: 8rem;
+	padding: 0;
+	font-size: 18px;
+	border-radius: 0;
+	border: none;
+	border-bottom: 1px solid rgba(0,0,0, 0.12);
+}
+
+/* Remove focus */
+.p-datepicker-year:focus {
+	outline: none;
+	border-bottom: 1px solid rgba(0,0,0, 0);
+}
+
+	/* Use custom arrow */
+.p-datepicker-year {
+	appearance: none;
+	-webkit-appearance:none;
+	color: var(--text-color);
+	option {
+		background-color: var(--surface-50);
+	}
+}
+
+.p-datepicker-year:after {
+	position: absolute;
+	top: 18px;
+	right: 10px;
+	/* Styling the down arrow */
+	width: 0;
+	height: 0;
+	padding: 0;
+	content: '';
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-top: 6px solid rgba(0, 0, 0, 0.12);
+	pointer-events: none;
+}
+

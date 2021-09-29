@@ -1,0 +1,204 @@
+<div *ngIf="renderView">
+	<app-page-header image="assets/images/group.png" text="ADMINISTRACIJA" [breadcrumbs]="administracijaBc"> </app-page-header>
+
+	<ng-container [ngTemplateOutlet]="usersTableRef"></ng-container>
+	<ng-container [ngTemplateOutlet]="usersTableRef2"></ng-container>
+</div>
+
+<ng-template #usersTableRef>
+	<div class="my-10 lg:mx-5">
+		<p-table responsiveLayout="scroll" [value]="users" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
+			<ng-template pTemplate="header" let-columns>
+				<tr>
+					<th colspan="1">
+						<button pButton pRipple type="button" icon="pi pi-file-excel" style="float: left; margin-left: 1rem" class="p-button-rounded p-button-success" pTooltip="{{ 'EXCEL_EXPORT' | translate }}" (click)="exportUsersToExcel()"></button>
+					</th>
+					<th colspan="5">
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 20px; font-variant: small-caps">{{ 'KORISNICI' | translate }}</span>
+					</th>
+					<th colspan="3">
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 16px">{{ 'FORUM' | translate }}</span>
+					</th>
+					<th colspan="3">
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 16px">{{ 'DIGITALNABIBLIOTEKA' | translate }}</span>
+					</th>
+					<th colspan="2">
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 16px">{{ 'ANKETE' | translate }}</span>
+					</th>
+					<th>
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 16px">{{ 'OBAVIJESTI' | translate }}</span>
+					</th>
+				</tr>
+				<tr>
+					<th pSortableColumn="PrezimeUsera">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center" style="font-size: 16px">{{ 'PREZIME' | translate }} </span>
+							<p-sortIcon field="PrezimeUsera"></p-sortIcon>
+							<p-columnFilter type="text" field="PrezimeUsera" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th pSortableColumn="ImeUsera">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center" style="font-size: 16px">{{ 'IME' | translate }}</span>
+							<p-sortIcon field="ImeUsera"></p-sortIcon>
+							<p-columnFilter type="text" field="ImeUsera" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th pSortableColumn="LoginName">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center" style="font-size: 16px">{{ 'USERNAME_ABBR' | translate }}</span>
+							<p-sortIcon field="LoginName"></p-sortIcon>
+							<p-columnFilter type="text" field="LoginName" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th>
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center" style="font-size: 16px">{{ 'CLANSTVO' | translate }}</span>
+							<p-columnFilter type="text" field="VrstaClanstvaNaziv" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th title="{{ 'ADMIN' | translate }}" style="font-size: 16px">{{ 'ADMIN' | translate }}</th>
+					<th title="{{ 'BLOKIRAN' | translate }}" style="font-size: 16px">{{ 'BLOKIRAN' | translate }}</th>
+
+					<th title="{{ 'KATEGORIJA' | translate }}" style="font-size: 16px">{{ 'KAT' | translate }}</th>
+					<th title="{{ 'OBJAVA' | translate }}" style="font-size: 16px">{{ 'OBJ' | translate }}</th>
+					<th title="{{ 'KOMENTAR' | translate }}" style="font-size: 16px">{{ 'KOM' | translate }}</th>
+
+					<th title="{{ 'KATEGORIJA' | translate }}" style="font-size: 16px">{{ 'KAT' | translate }}</th>
+					<th title="{{ 'DATOTEKA' | translate }}" style="font-size: 16px">{{ 'DAT' | translate }}</th>
+					<th title="{{ 'KOMENTAR' | translate }}" style="font-size: 16px">{{ 'KOM' | translate }}</th>
+
+					<th title="{{ 'PREDLOZAK' | translate }}" style="font-size: 16px">{{ 'PRED' | translate }}</th>
+					<th title="{{ 'ANKETA' | translate }}" style="font-size: 16px">{{ 'ANK' | translate }}</th>
+
+					<th title="{{ 'DODAVANJE' | translate }}" style="font-size: 16px">{{ 'DOD' | translate }}</th>
+				</tr>
+			</ng-template>
+
+			<ng-template pTemplate="body" let-user let-columns="columns">
+				<tr>
+					<td>{{ user.PrezimeUsera }}</td>
+					<td>{{ user.ImeUsera }}</td>
+					<td>{{ user.LoginName }}</td>
+					<td style="overflow: unset">
+						<p-dropdown [options]="vrsteClanstva" [(ngModel)]="user.PkVrstaClanstva" (onChange)="updateUserVrstaClanstva(user)" placeholder="{{ 'CLANSTVO_NEDEFINIRANO' | translate }}" optionValue="PkVrstaClanstva">
+							<ng-template let-item pTemplate="item">
+								<div>{{ item.VrstaClanstvaNaziv | translate }}</div>
+							</ng-template>
+							<ng-template let-item pTemplate="selectedItem">
+								<div>{{ item.VrstaClanstvaNaziv | translate }}</div>
+							</ng-template>
+						</p-dropdown>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.AdministratorDaNe" binary="true" (onChange)="updateUserApplicationGroup(user)"></p-checkbox>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.Blokiran" binary="true" (onChange)="updateUserStatus(user)"> </p-checkbox>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Forum.Kategorija" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Forum.Objava" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Forum.Komentar" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.eBiblioteka.Kategorija" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.eBiblioteka.Datoteka" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.eBiblioteka.Komentar" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Ankete.Predlozak" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Ankete.Anketa" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+
+					<td>
+						<p-checkbox [(ngModel)]="user.Claims.Obavijesti.Dodavanje" binary="true" (onChange)="updateUserClaims(user)" [disabled]="user.AdministratorDaNe"></p-checkbox>
+					</td>
+				</tr>
+			</ng-template>
+
+			<ng-template pTemplate="paginatorleft"></ng-template>
+			<ng-template pTemplate="paginatorright"></ng-template>
+		</p-table>
+	</div>
+</ng-template>
+
+<ng-template #usersTableRef2>
+	<div class="my-10 lg:mx-5">
+		<p-table responsiveLayout="scroll" [value]="logData" styleClass="p-datatable-gridlines" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 25]">
+			<ng-template pTemplate="header" let-columns>
+				<tr>
+					<th colspan="1">
+						<button pButton pRipple type="button" icon="pi pi-file-excel" style="float: left; margin-left: 1rem" class="p-button-rounded p-button-success" pTooltip="{{ 'EXCEL_EXPORT' | translate }}" (click)="exportLogsToExcel()"></button>
+					</th>
+					<th colspan="14">
+						<span class="flex justify-center w-full font-bold text-lg" style="font-size: 20px; font-variant: small-caps">{{ 'LOGPRISTUPAOSOBNIMPODACIMA' | translate }}</span>
+					</th>
+				</tr>
+				<tr>
+					<th pSortableColumn="ImePrezimeUseraPristupio">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center">{{ 'PRISTUPIO' | translate }} </span>
+							<p-sortIcon field="ImePrezimeUseraPristupio"></p-sortIcon>
+							<p-columnFilter type="text" field="ImePrezimeUseraPristupio" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th pSortableColumn="DatumVrijemePristupio">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center">{{ 'DATUMVRIJEME' | translate }}</span>
+							<p-sortIcon field="DatumVrijemePristupio"></p-sortIcon>
+							<p-columnFilter type="text" field="DatumVrijemePristupio" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th pSortableColumn="Akcija">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center">{{ 'AKCIJA' | translate }}</span>
+							<p-sortIcon field="Akcija"></p-sortIcon>
+							<p-columnFilter type="text" field="Akcija" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<th pSortableColumn="ImePrezimeUsera">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center">{{ 'PROFIL' | translate }}</span>
+							<p-sortIcon field="ImePrezimeUsera"></p-sortIcon>
+							<p-columnFilter type="text" field="ImePrezimeUsera" display="menu"></p-columnFilter>
+						</div>
+					</th>
+					<!-- <th pSortableColumn="Podaci">
+						<div class="flex justify-evenly items-center">
+							<span class="flex items-center">{{ 'PODACI' | translate }}</span>
+						</div>
+					</th> -->
+				</tr>
+			</ng-template>
+
+			<ng-template pTemplate="body" let-logData let-columns="columns">
+				<tr>
+					<td>{{ logData.ImePrezimeUseraPristupio }}</td>
+					<td>{{ logData.DatumVrijemePristupio | date: 'dd.MM.YYYY hh:mm' }}</td>
+					<td>{{ logData.Akcija }}</td>
+					<td>{{ logData.ImePrezimeUsera }}</td>
+					<!-- <td>{{ logData.Podaci }}</td>					 -->
+				</tr>
+			</ng-template>
+
+			<ng-template pTemplate="paginatorleft"></ng-template>
+			<ng-template pTemplate="paginatorright"></ng-template>
+		</p-table>
+	</div>
+</ng-template>

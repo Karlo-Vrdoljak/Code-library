@@ -1,0 +1,25 @@
+<div class="text-xs text-red-700 dark:text-red-400 py-1">
+  <ng-container *ngIf="appService.formErrorExists(error)">
+    <ng-container *ngFor="let err of errorList">
+      <div class="flex flex-col" [ngSwitch]="err.key">
+        <ng-container *ngSwitchCase="'required'">
+          <ng-container [ngTemplateOutlet]="defaultRender" [ngTemplateOutletContext]="{ err: err }"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'minlength'">
+          <ng-container [ngTemplateOutlet]="minLengthRender" [ngTemplateOutletContext]="{ err: err }"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchCase="'maxLength'">
+          <ng-container [ngTemplateOutlet]="minLengthRender" [ngTemplateOutletContext]="{ err: err }"></ng-container>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <ng-container [ngTemplateOutlet]="defaultRender" [ngTemplateOutletContext]="{ err: err }"></ng-container>
+        </ng-container>
+      </div>
+    </ng-container>
+  </ng-container>
+</div>
+
+<ng-template #minLengthRender let-err="err"> {{ err?.label | translate }} {{ err?.minlength.actualLength }}/{{ err?.minlength.requiredLength }} {{ 'CHARACTERS' | translate }} </ng-template>
+<ng-template #defaultRender let-err="err">
+  {{ err?.label | translate }}
+</ng-template>

@@ -1,0 +1,67 @@
+<div #navbar class="fixed w-full shadow-md z-50">
+	<p-toolbar *ngIf="loggedin">
+		<div class="p-toolbar-group-left" style="width: 140px;">
+			<div class="ml-2 flex flex-row" style="margin-left: 0px; margin-right: 5px;">
+				<a [routerLink]="['/home']">
+					<div pRipple class="indigo mr-2 flex items-center justify-center">
+						<img *ngIf="language == 'hr'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoHR.png" />
+						<img *ngIf="language == 'en'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoEN.png" />
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="flex flex-row items-center">
+			<ng-container *ngFor="let item of mainNavItems">
+				<div *ngIf="item.id != 'moj_profil'" class="mr-2">
+					<a [routerLink]="item.useQueryParam ? item.link + '/' + currentUser?.PkUsera : item.link" routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }">
+						<button [style]="{ minWidth: '6rem' }" pRipple pButton [icon]="item.icon" [label]="item.label | translate" class="primary" [ngClass]="{ 'p-button-outlined': checkActive(rla, rla.isActive), 'p-button-text': !checkActive(rla, rla.isActive) }"></button>
+					</a>
+				</div>
+				<div *ngIf="item.id == 'moj_profil' && currentUser?.PkUsera" class="mr-2">
+					<a [routerLink]="item.useQueryParam ? item.link + '/' + currentUser?.PkUsera : item.link" routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }">
+						<button [style]="{ minWidth: '6rem' }" pRipple pButton [icon]="item.icon" [label]="item.label | translate" class="primary" [ngClass]="{ 'p-button-outlined': checkActive(rla, rla.isActive), 'p-button-text': !checkActive(rla, rla.isActive) }"></button>
+					</a>
+				</div>
+			</ng-container>
+		</div>
+		<div class="p-toolbar-group-right">
+			<div class="flex flex-row items-start justify-evenly">
+				<div *ngIf="!hamburgerItems?.length && showUpute === true" class="flex items-center justify-center" title="{{ 'UPUTE' | translate }}">
+					<div (click)="uputeDownload()" class="rounded-full select-none dark:bg-indigo-500 dark:hover:bg-indigo-600 bg-indigo-600 py-2 px-3 leading-7 text-white mr-2 cursor-pointer transition-colors hover:bg-indigo-500">
+						<i class="pi pi-file"></i>						
+					</div>
+				</div>
+				<div class="flex items-center justify-center">
+					<div pRipple (click)="appService.toggleLang(); setLanguage()" class="rounded-full select-none dark:bg-indigo-500 dark:hover:bg-indigo-600 bg-indigo-600 py-2 px-3 leading-7 text-white mr-2 cursor-pointer transition-colors hover:bg-indigo-500">
+						{{ translate.currentLang | uppercase }}
+					</div>
+				</div>
+				<div class="flex items-center justify-center">
+					<div pRipple (click)="themingService.toggleTheme()" class="rounded-full bg-indigo-600 dark:bg-yellow-400 dark:hover:bg-yellow-500 py-2 px-3.5 leading-7 text-lg text-white dark:text-gray-600 mr-2 cursor-pointer transition-colors hover:bg-indigo-500">
+						<i [class]="themingService.currentTheme == 'dark' ? 'pi pi-sun' : 'pi pi-moon'"></i>
+					</div>
+				</div>
+				<div class="flex items-center justify-center">
+					<app-user-nav></app-user-nav>
+				</div>
+				<div class="flex items-center justify-center">
+					<div *ngIf="hamburgerItems?.length">
+						<button (click)="op.toggle($event)" pRipple pButton icon="pi pi-bars" class="p-button-text p-button-rounded"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</p-toolbar>
+</div>
+<!--[queryParams]="[item.useQueryParam] ? {PkUser: globalVar.korisnikPkUsera} : null"-->
+<p-overlayPanel #op>
+	<ng-template pTemplate>
+		<div class="flex flex-col items-center justify-items-start w-40">
+			<div *ngFor="let item of hamburgerItems" class="w-full" (click)="hidePanel(op)">
+				<a class="w-full" [routerLink]="item.useQueryParam ? item.link + '/' + currentUser?.PkUsera : item.link" routerLinkActive #rla="routerLinkActive" [routerLinkActiveOptions]="{ exact: true }">
+					<button [style]="{ minWidth: '6rem' }" pRipple pButton [icon]="item.icon" [label]="item.label | translate" class="popup-menu w-full" [ngClass]="{ 'p-button-outlined': checkActive(rla, rla.isActive), 'p-button-text': !checkActive(rla, rla.isActive) }"></button>
+				</a>
+			</div>
+		</div>
+	</ng-template>
+</p-overlayPanel>

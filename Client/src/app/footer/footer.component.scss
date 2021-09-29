@@ -1,0 +1,36 @@
+:host ::ng-deep {
+  .footer {
+    &.p-button,
+    &.p-button-text {
+      color: var(--primary-color);
+    }
+    .p-button-icon {
+      margin-right: unset;
+    }
+
+    &.p-button {
+      .p-button-label {
+        text-align: left;
+      }
+      &.p-button-outlined,
+      &.p-button-outlined:enabled:hover {
+        border: 0;
+        border-radius: 0;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        position: relative;
+        transition: height 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        &:after {
+          background: var(--primary-color) none repeat scroll 0 0;
+          content: ' ';
+          display: inline-block;
+          height: 3px;
+          left: 0;
+          bottom: 0;
+          position: absolute;
+          width: 100%;
+        }
+      }
+    }
+  }
+}

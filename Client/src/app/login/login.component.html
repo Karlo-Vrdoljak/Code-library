@@ -1,0 +1,61 @@
+<div class="relative dark:reset-bg login-wrap p-4 md:pt-8 lg:pt-12 xl:pt-16 h-full app-wrap w-full relative bg-wrap bg-home dark:bg-home">
+	<div class="mx-auto flex flex-col w-full max-w-sm px-4 py-8 bg-white rounded-lg shadow-md dark:bg-gray-800 backdrop-filter backdrop-blur-md dark:bg-opacity-70 sm:px-6 md:px-8 lg:px-10">
+		<div class="self-center w-full mb-6 font-extralight text-gray-600 sm:text-2xl dark:text-white">
+			<div class="flex flex-col items-center justify-center">
+				<!-- <div class="text-3xl leading-loose">{{ 'DOBRODOSLI' | translate }}</div> -->
+				<img *ngIf="language == 'hr'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoHR.png" />
+				<img *ngIf="language == 'en'" [default]="true" class="cursor-pointer w-30 h-9" src="assets/images/MefstLogoEN.png" />
+				<img [default]="true" class="mb-2 w-20 h-20" style="margin-top:30px;" src="assets/images/alumni.png" />
+				<div class="text-5xl leading-loose" style="margin-top:-45px;">{{ 'ALUMNI' | translate }}</div>
+			</div>
+		</div>
+		<div class="mt-2">
+			<form [formGroup]="form" (keyup.enter)="!checkCanSubmit() && useCleanup.isLoading == false">
+				<div class="flex flex-col mb-2">
+					<div class="flex flex-col relative">
+						<span class="p-float-label w-full">
+							<input required formControlName="username" id="input-username" class="w-full" pInputText type="text" />
+							<label for="input-username">{{ 'USERNAME' | translate }}</label>
+						</span>
+						<app-form-error *ngIf="appService.formHasErrors(form.controls?.username)" [error]="form.controls?.username?.errors"></app-form-error>
+					</div>
+				</div>
+				<div class="flex flex-col mb-2">
+					<div class="flex flex-col relative">
+						<span class="p-float-label w-full p-input-icon-right">
+							<i (click)="pw.type = pw.type == 'password' ? 'text' : 'password'" class="cursor-pointer pi" [ngClass]="{ 'pi-eye': pw.type == 'text', 'pi-eye-slash': pw.type == 'password' }"></i>
+							<input required formControlName="password" #pw type="password" id="input-ime" class="w-full" pInputText />
+							<label for="input-ime">{{ 'LOZINKA' | translate }}</label>
+						</span>
+						<app-form-error *ngIf="appService.formHasErrors(form.controls?.password)" [error]="form.controls?.password?.errors"></app-form-error>
+					</div>
+				</div>
+				<div class="flex items-center justify-end mb-6">
+					<a [routerLink]="['/change-password-prompt']" class="inline-flex items-center text-xs text-center text-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-white">
+						<span class="ml-2">{{ 'ZABORAVLJENA_LOZINKA' | translate }}</span>
+					</a>
+				</div>
+				<!-- <div *ngIf="isProd" class="flex w-full mb-4">
+          <div class="flex-col relative">
+            <app-captcha required formControlName="captcha"></app-captcha>
+            <app-form-error *ngIf="appService.formHasErrors(form.controls?.captcha)" [error]="form.controls?.captcha?.errors"></app-form-error>
+          </div>
+        </div> -->
+				<div class="flex w-full">
+					<button (click)="login()" [disabled]="checkCanSubmit()" [loading]="useCleanup.isLoading" pRipple pButton [label]="'SIGNIN' | translate" class="w-full"></button>
+				</div>
+				<div class="flex items-center justify-center mt-6">
+					<a [routerLink]="['/pick/register']" class="inline-flex items-center text-xs text-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
+						<span class="ml-2">{{ 'NO_ACC' | translate }}</span>
+					</a>
+				</div>
+				<div *ngIf="aaiUrl" [@fadeInExpandOnEnter] [@fadeOutCollapseOnLeave] class="flex items-center justify-center mt-6">
+					<a rel="noreferrer noopener" [href]="aaiUrl" class="flex w-full items-center text-xs text-center text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white">
+						<img [default]="true" src="assets/images/aai.png" class="w-1/6" alt="" />
+						<div class="w-5/6">{{ 'CONTINUE_W_AAI' | translate }}</div>
+					</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

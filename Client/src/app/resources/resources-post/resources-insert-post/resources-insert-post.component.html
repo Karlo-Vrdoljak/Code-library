@@ -1,0 +1,58 @@
+<div class="flex justify-center">
+	<div class="flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 backdrop-filter backdrop-blur-md dark:bg-opacity-70 p-10">
+		<span *ngIf="insertToCategory" class="flex text-lg mb-3 dark:text-yellow-400 text-indigo-500 font-bold">{{ insertToCategory.Naziv }} • {{ 'DODAJTE_DATOTEKU' | translate }}</span>
+		
+		<form class="w-full max-w-lg" [formGroup]="insertForm">
+			<div class="flex flex-wrap -mx-3">
+				<div class="w-full px-3 mb-6 md:mb-2">
+					<span class="p-float-label w-full">
+						<input class="w-full" pInputText required type="text" formControlName="Naslov"/>
+						<label for="input-username">{{ 'NASLOV' | translate }}</label>
+					</span>
+				</div>
+
+				<div class="w-full px-3 mb-6 md:mb-2">
+					<span class="p-float-label w-full">
+						<textarea class="w-full" pInputText required type="text" formControlName="Sadrzaj"></textarea>
+						<label for="input-username">{{ 'SADRZAJ' | translate }}</label>
+					</span>
+				</div>
+
+				<div class="mt-4 w-full">
+					<div class="flex w-full justify-between px-3 mb-6 md:mb-2 items-center border-b-2 border-gray-400">
+						<div class="text-lg lg:text-xl text-gray-500 dark:text-gray-300 font-bold">
+                            {{'DATOTEKE' | translate}}
+                        </div>
+
+						<div class="flex items-center w-1/11 cursor-pointer" (click)="openPriloziPreviewDialog()">
+							<div class="flex pr-2 items-center font-bold lg:text-2xl text-lg text-gray-500 dark:text-gray-100 overflow-hidden text-center">
+								<i class="pi pi-paperclip lg:text-xl text-sm text-gray-400 mr-1"></i>
+							</div>
+							<div class="px-1 py-1 items-center font-medium lg:text-sm text-xs text-gray-500 dark:text-gray-200">
+								{{ addPostModel.prilozi.length | abbreviateNumber: 2 }}
+							</div>
+						</div>
+					</div>
+
+					<div>
+						<div class="w-full px-3 mb-6 md:mb-2">
+							<app-add-attachment [ignoreRedirectBack]="true" [emitValue]="true" #prilogRef (onSave)="onSaveAttachment($event)"> </app-add-attachment>
+						</div>
+					</div>
+				</div>
+
+				<div class="w-full px-3 mb-6 md:mb-2">
+					<button pRipple pButton [label]="'OBJAVI' | translate | uppercase" class="w-full" (click)="insertPost()" [disabled]="checkValidForm(insertForm) || addPostModel.prilozi.length === 0"></button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<p-dialog appendTo="body" [modal]="true" [header]="'PREGLED_PRILOGA' | translate" (onHide)="handleCloseCommentPrilogPreview()" [closeOnEscape]="true" [(visible)]="displayPriloziPreviewDialog" [resizable]="false" [closable]="true" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+	<div *ngIf="displayPriloziPreviewDialog" class="flex flex-wrap mx-2 my-4 items-center w-full">
+		<ng-container *ngFor="let item of addPostModel.prilozi">
+			<app-prilog (onDelete)="handleOnDeletePrilog($event)" [hasOpis]="false" class="h-full p-col-4 p-sm-4 p-lg-2" [prilog]="item" [CRUDrights]="[globalVar.attachmentsRights.delete]"></app-prilog>
+		</ng-container>
+	</div>
+</p-dialog>

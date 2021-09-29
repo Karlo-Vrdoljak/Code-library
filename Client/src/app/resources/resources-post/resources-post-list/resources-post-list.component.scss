@@ -1,0 +1,27 @@
+.hiddenText {
+    line-height: 17px;
+    word-break: break-word;
+    overflow: hidden;
+    padding-bottom: 1px;
+    max-height: 55px;
+    min-height: 45px;
+    margin-bottom: -1px;
+    -webkit-mask-image: linear-gradient( 
+180deg
+ ,rgb(0, 0, 0) 50%,transparent);
+}
+
+:host::ng-deep {
+    .p-button-outlined {
+        margin-right: 0.75rem;
+        height: 30px;
+        align-self: center;
+    }
+
+    .p-badge {
+        position: absolute;
+        right: -10px;
+        top: -10px;    
+    }
+}
+

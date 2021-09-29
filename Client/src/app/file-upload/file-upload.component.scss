@@ -1,0 +1,26 @@
+:host ::ng-deep {
+  @media (max-width:640px) {
+    p-fileUpload {
+      &.basicUploader {
+        width: 100%;
+        .p-fileupload-basic {
+          width: 100%;
+          .p-fileupload-choose  {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  p-fileUpload {
+    &.basicUploader.w-full {
+      width: 100%;
+      .p-fileupload-basic {
+        width: 100%;
+        .p-fileupload-choose  {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

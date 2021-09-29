@@ -1,0 +1,74 @@
+{
+  fields: {
+    PkObjava: '14',
+    Sadrzaj: 'idgi pa prčit',
+    UserUnos: 'Karlo Vrdoljak',
+    'PkOsobniPodaciPkUsera.0': 'undefined',
+    'PkObjava.0': '14',
+    'NazivCoverImageMeta.0': 'undefined',
+    'NazivDatotekaMeta.0': 'file nulaa 000',
+    'OpisDatotekaMeta.0': '000',
+    'PkOsobniPodaciPkUsera.1': 'undefined',
+    'PkObjava.1': '14',
+    'CoverImage.1': 'null',
+    'NazivCoverImageMeta.1': 'undefined',
+    'NazivDatotekaMeta.1': 'bez slije ',
+    'OpisDatotekaMeta.1': 'file 1'
+  }
+}
+{
+  files: {
+    'CoverImage.0': File {
+      _events: [Object: null prototype] {},
+      _eventsCount: 0,
+      _maxListeners: undefined,
+      size: 73500,
+      path: 'C:\\Users\\filip.bikic\\Documents\\Github\\Alumni\\AlumniNode\\dist\\uploads\\tempFiles\\korisnici\\attachment\\upload_8216665ed29d2d45440576dc67044dd0.jpg',
+      name: 'motor-2.0-8v-85kw-c20ne-slika-117772232.jpg',
+      type: 'image/jpeg',
+      hash: null,
+      lastModifiedDate: 2021-07-20T09:38:21.473Z,
+      _writeStream: [WriteStream],
+      [Symbol(kCapture)]: false
+    },
+    'file.0': File {
+      _events: [Object: null prototype] {},
+      _eventsCount: 0,
+      _maxListeners: undefined,
+      size: 1026736,
+      path: 'C:\\Users\\filip.bikic\\Documents\\Github\\Alumni\\AlumniNode\\dist\\uploads\\tempFiles\\korisnici\\attachment\\upload_66880bfd271cd8756b6e81a21d50ce8f.docx',
+      name: 'file-sample_1MB (2).docx',
+      type: 'application/octet-stream',
+      hash: null,
+      lastModifiedDate: 2021-07-20T09:38:21.493Z,
+      _writeStream: [WriteStream],
+      [Symbol(kCapture)]: false
+    },
+    'file.1': File {
+      _events: [Object: null prototype] {},
+      _eventsCount: 0,
+      _maxListeners: undefined,
+      size: 1026736,
+      path: 'C:\\Users\\filip.bikic\\Documents\\Github\\Alumni\\AlumniNode\\dist\\uploads\\tempFiles\\korisnici\\attachment\\upload_9331a1e72fb4ee9052ffda367b25b464.docx',
+      name: 'file-sample_1MB (3).docx',
+      type: 'application/octet-stream',
+      hash: null,
+      lastModifiedDate: 2021-07-20T09:38:21.512Z,
+      _writeStream: [WriteStream],
+      [Symbol(kCapture)]: false
+    }
+  }
+}
+{
+  fields: {
+    PkObjava: '14',
+    Sadrzaj: 'idgi pa prčit',
+    UserUnos: 'Karlo Vrdoljak',
+    PkOsobniPodaciPkUsera: [ 'undefined', 'undefined' ],
+    NazivCoverImageMeta: [ 'undefined', 'undefined' ],
+    NazivDatotekaMeta: [ 'file nulaa 000', 'bez slije ' ],
+    OpisDatotekaMeta: [ '000', 'file 1' ],
+    CoverImage: [ <1 empty item>, 'null' ]
+  }
+}
+{ files: { CoverImage: [ [File] ], file: [ [File], [File] ] } }

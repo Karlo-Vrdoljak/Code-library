@@ -1,0 +1,161 @@
+{
+	"mainParams": {
+		"applicationPort": 8099,
+		"checkAuthHeader": true,
+		"logiranBezAktivnosti": 3
+	},
+	"ukljuciConsoleLog": {
+		"ukljuciConsoleLog": true,
+		"ukljuciStackTrace": true,
+		"_comment_ukljuciConsoleLog": ""
+	},
+	"codes": {
+		"alpha": "1ddc09a2860d4b001987a6b21276a86343d2983442214c6c583ab01a",
+		"beta": "448942efd74d41000dc5e2a64333eb613fd796600920486f183fe05aed89cf791616b8b39d7a7958843471896a",
+		"delta": "488d42b6800a184b1ec4e0"
+	},
+	"appLogParams": {
+		"apiCallLog": false,
+		"_comment_apiCallLog": "true znaci da ce morgan zapisivati podatke o svakom API pozivu u log"
+	},
+	"databaseParams": {
+		"productionDatabaseServer": "lamasqlrazvoj.lama.hr",
+		"productionDatabaseServerInstanceName": "sql2017",
+		"productionDatabaseName": "AlumniRazvoj",
+		"productionUserName": "1984",
+		"productionPassword": "0d8947ad05cbd41ddc9f",
+		"testDatabaseServer": "lamasqlrazvoj.lama.hr",
+		"testDatabaseServerInstanceName": "sql2017",
+		"testDatabaseName": "AlumniRazvoj",
+		"testUserName": "1984",
+		"testPassword": "0d8947ad05cbd41ddc9f",
+		"_comment_database4Servisi": "Može biti produkcijska - Produkcijska baza podataka ili testna - Produkcijska baza podataka baza podataka",
+		"database4Servisi": "Produkcijska baza podataka"
+	},
+
+	"directoryParams": {
+		"uploadPath": "C:\\Users\\denis.stajduhar\\Desktop\\LAMA\\_Alumni\\AlumniNode\\dist\\uploads\\",
+		"uploadPathTest": "C:\\Users\\denis.stajduhar\\Desktop\\LAMA\\_Alumni\\AlumniNode\\dist\\uploads\\test\\",
+		"nodeSrv": "C:\\Users\\denis.stajduhar\\Desktop\\LAMA\\_Alumni\\AlumniNode\\dist\\",
+		"tempFilesPath": "C:\\Users\\denis.stajduhar\\Desktop\\LAMA\\_Alumni\\AlumniNode\\dist\\uploads\\tempFiles\\",		
+		"_comment_uploadPath": "Putanja do uploads direktorija",
+		"_comment_uploadPathTest": "Putanja do test uploads direktorija",
+		"_comment_nodeSrv": "potreban aposlutni path za dohvacanje pdfa (NoFile.pdf i NoFileVersion.pdf) sa servera",
+		"_comment_tempFilesPath": ""
+	},
+	"cronJobConfigs": {
+		"mailPolling": {
+			"mailPollingOnOff": 0,
+			"mailPollingInterval": "* * * * *",
+			"_comment_mailPollingOnOff": "1 = provjera maila svakih mailPollingInterval sekundi 0 = nema provjere maila"
+		}
+	},
+	"ldap": {
+		"ActiveDirectoryApi": "ldap://lamadc01.lama.hr",
+		"ldapDomena": "@lama.hr",
+		"baseDN": "dc=lama,dc=hr"
+	},
+	"jwtConfig": {
+		"_comment_decryptKeys": "Only works on key value pairs",
+		"decryptKeys": ["jwtSecret", "expiresIn", "algorithm"],
+		"jwtSecret": "5fdc57be5092871cc1cb280af9d1e0ece076c8c8049d72928f344b133b3ddf22cf082af5",
+		"acceptableSecrets": [],
+		"expiresIn": "5d81",
+		"algorithm": "22b607ec56",
+		"defaultUserClaims": {
+			"Forum": {
+				"Kategorija": false,
+				"Objava": false,
+				"Komentar": false
+			},
+			"eBiblioteka": {
+				"Kategorija": false,
+				"Datoteka": false,
+				"Komentar": false
+			},
+			"Ankete": {
+				"Predlozak": false,
+				"Anketa": false
+			},
+			"Obavijesti": {
+				"Dodavanje": false
+			}
+		}
+	},
+	"oauth": {
+		"google": {
+			"GOOGLE_CLIENT_ID": "272884042383-blcq5k9qi4n9ptjk606lo5vcpn5r6l11.apps.googleusercontent.com",
+			"GOOGLE_CLIENT_SECRET": "L0G_w8NLhIrCZFw65OqzsszP",
+			"redirectUrl": "http://lvh.me:4200/register"
+		}
+	},
+	"eduplanSync": {
+		"API_URL": "http://localhost:8090/api/alumniSyncUser"
+	},
+	"mailConfig": {
+		"outgoingMailParams": {},
+		"incomingMailParams": {
+			"mailUser": "AlumniWebApplication@gmail.com",
+			"mailPass": "lmlcuqpyalfuhazo",
+			"_comment_mailService": "odreduje koji se mail servis koristi za slanje maila iz aplikacije",
+			"mailService": "Gmail",
+			"_comment_mailServiceDaNe": "odreduje da li se za mail koristi servis ili se rucno postavlja host i port",
+			"mailServiceDaNe": "true",
+			"_comment_mailHost": "ako se ne koristi mail service uzima se host",
+			"mailHost": "",
+			"_comment_mailPort": "ako se ne koristi mail service uzima se port",
+			"mailPort": "0",
+			"imapServer": "imap.gmail.com",
+			"imapServerPort": "993",
+			"organizationContactLink": "https://www.lama.hr/kontakt/",
+			"staticUrl": "https://a398049921e8.ngrok.io/public",
+			"appLink": "http://localhost:4200"
+		},
+		"emails": {
+			"accConfirm": {
+				"url": "http://localhost:4200/acc-confirm",
+				"template": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\confirmAccount.hbs",
+				"attachments": [
+					{
+						"filename": "systemImage.png",
+						"path": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\images\\systemImage.png",
+						"cid": "systemImagePng"
+					}
+				]
+			},
+			"passReset": {
+				"url": "http://localhost:4200/password-reset",
+				"template": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\resetPassword.hbs",
+				"attachments": [
+					{
+						"filename": "systemImage.png",
+						"path": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\images\\systemImage.png",
+						"cid": "systemImagePng"
+					}
+				]
+			},
+			"anketaLink": {
+				"url": "http://localhost:4200/surveys/solve",
+				"template": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\anketaLink.hbs",
+				"attachments": [
+					{
+						"filename": "systemImage.png",
+						"path": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\images\\systemImage.png",
+						"cid": "systemImagePng"
+					}
+				]
+			},
+			"obavijestLink": {
+				"url": "http://localhost:4200/notifications",
+				"template": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\obavijestiLink.hbs",
+				"attachments": [
+					{
+						"filename": "systemImage.png",
+						"path": "C:\\Projekti\\AlumniNode\\src\\mail\\templates\\images\\systemImage.png",
+						"cid": "systemImagePng"
+					}
+				]
+			}
+		}
+	}
+}

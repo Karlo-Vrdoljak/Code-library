@@ -1,0 +1,211 @@
+<!-- DISPLAY KOMPONENTE KADA SE TEK UDE U RESURSE, IZLIST SVIH PREDEFINIRANIH KATEGORIJA S NJIHOVIM PODKATEGORIJAMA -->
+<div *ngIf="renderView">
+	<div *ngIf="!categoryView; else categoryDisplay">
+		<app-page-header image="assets/images/megaphone.png" text="DIGITALNABIBLIOTEKA" [breadcrumbs]="resourcesBc">
+			<!-- <button type="button" icon="pi pi-arrow-circle-left" class="p-button-text p-button-info" pButton pRipple [label]="'BACK' | translate" backButton></button> -->
+			<ng-container [ngTemplateOutlet]="searchForm"></ng-container>
+		</app-page-header>
+	
+		<ng-template #searchForm>
+			<div class="flex w-full justify-center">
+				<div class="flex items-center relative justify-between w-full md:w-3/5">
+					<div class="w-full">
+						<form [formGroup]="globalSearchForm" class="w-full">
+							<span class="p-float-label p-input-icon-right w-full">
+								<i [@fadeOutOnLeave] [@fadeInOnEnter] *ngIf="!globalSearchForm?.controls?.search?.value" class="pi pi-search"></i>
+								<input formControlName="search" id="input-search" class="w-full" pInputText type="text" />
+								<label for="input-username"> {{ 'SEARCH' | translate }}</label>
+							</span>
+						</form>
+					</div>
+					<div class="flex right-3 top-1 md:right-4 absolute items-center justify-center">
+						<button [@fadeInOnEnter] [placeholder]="'SEARCH' | translate" [@fadeOutOnLeave] *ngIf="globalSearchForm?.controls?.search?.value" (click)="resetSearch(globalSearchForm)" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-plain p-button-text"></button>
+					</div>
+				</div>
+				<div *ngIf="false" class="flex flex-col px-4 items-center relative justify-between py-2 md:py-0 w-full md:w-1/4">
+					<div class="w-full h-full flex items-stretch justify-center">
+						<button pRipple pButton class="w-full" icon="pi pi-search-plus" [label]="'ADVANCED_SEARCH' | translate" (click)="openAdvancedSearchForm()"></button>
+					</div>
+				</div>
+			</div>
+		</ng-template>
+	
+		<div *ngIf="nullLevelCategoriesWithSubCat.length > 0" class="mt-5">
+			<div class="flex justify-start lg:justify-center px-4 md:px-8" *ngFor="let category of nullLevelCategoriesWithSubCat">
+				<div *ngIf="!query || (category?.subCat?.length && query)" data-aos="fade-up" class="w-full lg:w-3/5 px-3 mb-5 bg-white dark:bg-gray-900 rounded shadow-md">
+					<h4 class="flex items-end justify-between mb-3 text-2xl font-bold leading-tight text-gray-500 pt-2 dark:text-gray-100">
+						<span class="self-center">{{ category.Naziv }}</span>
+						<div *ngIf="hasCategoryRights" class="flex justify-around">
+							<div (click)="setSelectedCategory(category); toogleInsertDialog()" class="hidden lg:block cursor-pointer text-xl dark:text-yellow-400 text-indigo-500">
+								<ng-container *ngTemplateOutlet="insertDialogButton"></ng-container>
+							</div>
+							<div class="lg:hidden" (click)="navigateAddCategory(category)">
+								<ng-container *ngTemplateOutlet="insertDialogButton"></ng-container>
+							</div>
+						</div>
+					</h4>
+	
+					<div>
+						<ng-container [ngTemplateOutlet]="categoryCardDesktop" [ngTemplateOutletContext]="{ categories: category?.subCat || [], isClientSide: false }"></ng-container>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- DISPLAY KOMPONENTE KADA SE UDE U KATEGORIJU -->
+<ng-template #categoryDisplay>
+	<div class="mt-5">
+		<div class="flex justify-start lg:justify-center px-4 md:px-8">
+			<div class="w-full lg:w-3/5 px-3 mb-5 bg-white dark:bg-gray-900 rounded shadow-md">
+				<h4 class="flex items-end justify-between mb-3 text-2xl font-bold leading-tight text-gray-500 pt-2 dark:text-gray-100 h-12">
+					<span class="self-center">
+						{{ 'POTKATEGORIJE' | translate }}
+					</span>
+					<div *ngIf="hasCategoryRights" class="flex w-1/2 lg:w-2/6 justify-end">
+						<div (click)="toogleInsertDialog()" class="hidden lg:block cursor-pointer text-xl dark:text-yellow-400 text-indigo-500">
+							<ng-container *ngTemplateOutlet="insertDialogButton"></ng-container>
+						</div>
+						<div class="lg:hidden" (click)="navigateAddCategory(currCategory)">
+							<ng-container *ngTemplateOutlet="insertDialogButton"></ng-container>
+						</div>
+
+						<div *ngIf="((userData && userData.PkUseraInt === currCategory.PkUserUnos) || userData.IsAdmin)" class="flex">
+							<div (click)="toogleEditDialog()" class="hidden lg:block cursor-pointer text-xl dark:text-yellow-400 text-indigo-500">
+								<ng-container *ngTemplateOutlet="editDialogButton"></ng-container>
+							</div>
+							<div class="lg:hidden" (click)="navigateEditCategory(currCategory)">
+								<ng-container *ngTemplateOutlet="editDialogButton"></ng-container>
+							</div>
+	
+							<div (click)="openDeleteDialogConfirmation()" class="cursor-pointer text-xl dark:text-yellow-400 text-indigo-500">
+								<ng-container *ngTemplateOutlet="deleteDialogButton"></ng-container>
+							</div>
+						</div>
+					</div>
+				</h4>
+
+				<div>
+					<ng-container [ngTemplateOutlet]="categoryCardDesktop" [ngTemplateOutletContext]="{ categories: paginatorSubCat || [], isClientSide: true }"></ng-container>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<!-- DIZAJN KARTICE ZA DESKTOP VIEW-->
+<ng-template #categoryCardDesktop let-categories="categories" let-usePaginator="usePaginator" let-isClientSide="isClientSide">
+	<div *ngFor="let category of categories; let i = index" (click)="navigateToCategory(category.PkResursKategorija)">
+		<div class="flex justify-center">
+			<div class="w-full pb-2">
+				<div data-aos="zoom-in" class="flex text-gray-500 px-3 lg:py-2 w-full cursor-pointer shadow transform hover:opacity-70" [ngClass]="{ 'bg-indigo-100 dark:bg-indigo-900 dark:bg-opacity-30': i % 2 === 0, 'bg-indigo-200 dark:bg-gray-800 backdrop-filter backdrop-blur-md dark:bg-opacity-70': i % 2 != 0 }">
+					<div class="w-10 hidden sm:flex justify-center items-center">
+						<i class="pi pi-book" style="font-size: 1.2rem"></i>
+					</div>
+					<div class="hidden sm:flex flex-wrap flex-row overflow-hidden px-1 w-full">
+						<div class="font-bold text-md lg:text-xl text-indigo-500 dark:text-yellow-400 overflow-hidden w-3/5">
+							{{ category.Naziv }}
+						</div>
+
+						<div class="font-bold lg:text-2xl text-lg text-gray-500 dark:text-gray-100 overflow-hidden w-1/5 text-center">
+							{{ category.PotkategorijeCount | abbreviateNumber: 2 }}
+						</div>
+
+						<div class="font-bold lg:text-2xl text-lg text-gray-500 dark:text-gray-100 overflow-hidden w-1/5 text-center">
+							{{ category.ObjaveCount | abbreviateNumber: 2 }}
+						</div>
+
+						<div class="text-sm lg:text-base text-gray-500 dark:text-gray-100 overflow-hidden w-3/5">
+							{{ category.Opis }}
+						</div>
+
+						<div class="mt-1 text-xs text-gray-500 dark:text-gray-400 truncate ... w-1/5 text-center">
+							{{ 'POTKATEGORIJE' | translate }}
+						</div>
+
+						<div class="mt-1 text-xs text-gray-500 dark:text-gray-400 overflow-hidden w-1/5 text-center">
+							{{ 'DATOTEKE' | translate }}
+						</div>
+					</div>
+					<div *ngIf="userData" class="w-10 hidden sm:flex justify-center items-center">
+						<i class="pi pi-bell" style="font-size: 1.3rem;" [ngStyle]="{'color': isSubscribed(category) ? 'green' : '#797979'}" (click)="handleSubscribeOnClick($event, category)"></i>
+					</div>
+					
+					<div class="flex flex-wrap sm:hidden w-full">
+						<div class="flex flex-wrap flex-col overflow-hidden p-2 w-full">
+							<ng-container [ngTemplateOutlet]="mobileRenderCategoryRef" [ngTemplateOutletContext]="{ category: category }"></ng-container>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p-paginator [alwaysShow]="false" [first]="paginatorMap[categories[0]?.ParentPk]?.first || 0" [showFirstLastIcon]="true" [showJumpToPageDropdown]="true" [showPageLinks]="smallScreen" [rows]="paginatorMap[categories[0]?.ParentPk]?.rows" [totalRecords]="paginatorMap[categories[0]?.ParentPk]?.TotalRecords" (onPageChange)="paginate($event, categories[0]?.ParentPk, isClientSide)"></p-paginator>
+</ng-template>
+
+<ng-template #mobileRenderCategoryRef let-category="category">
+	<div class="w-full">
+		<div class="font-bold text-center text-md lg:text-xl text-indigo-500 dark:text-yellow-400 overflow-hidden w-full">
+			{{ category.Naziv }}
+		</div>
+
+		<div class="mt-2 text-sm text-center mb-2 lg:text-base text-gray-500 dark:text-gray-100 overflow-hidden w-full">
+			{{ category.Opis }}
+		</div>
+	</div>
+
+	<div class="flex flex-row w-full">
+		<div class="flex flex-col w-1/3" [ngClass]="{'w-full': !userData}">
+			<div class="mt-2 font-bold lg:text-2xl text-lg text-gray-500 dark:text-gray-100 overflow-hidden w-full text-center">
+				{{ category.PotkategorijeCount | abbreviateNumber: 2 }}
+			</div>
+			<div class="lg:text-md text-xs text-gray-500 dark:text-gray-400 truncate ... w-full text-center">
+				{{ 'POTKATEGORIJE' | translate }}
+			</div>
+		</div>
+		<div *ngIf="userData" class="flex flex-col w-1/3 justify-center items-center">
+			<i class="pi pi-bell" style="font-size: 1.3rem;" [ngStyle]="{'color': isSubscribed(category) ? 'green' : '#797979'}" (click)="handleSubscribeOnClick($event, category)"></i>
+		</div>
+		<div class="flex flex-col w-1/3" [ngClass]="{'w-full': !userData}">
+			<div class="mt-2 font-bold lg:text-2xl text-lg tealignxt-gray-500 dark:text-gray-100 overflow-hidden w-full text-center">
+				{{ category.ObjaveCount | abbreviateNumber: 2 }}
+			</div>
+			<div class="lg:text-md text-xs text-gray-500 dark:text-gray-400 overflow-hidden w-full text-center">
+				{{ 'POSTS' | translate }}
+			</div>
+		</div>
+	</div>
+</ng-template>
+
+<!-- CRUD BOTUNI START-->
+<ng-template #insertDialogButton>
+	<button pButton pRipple type="button" [ngClass]="{ 'p-button-primary': themingService.currentTheme == 'light', 'p-button-warning': themingService.currentTheme == 'dark' }" icon="pi pi-plus" class="p-button-text p-button-rounded"></button>
+</ng-template>
+
+<ng-template #editDialogButton>
+	<button pButton pRipple type="button" [ngClass]="{ 'p-button-primary': themingService.currentTheme == 'light', 'p-button-warning': themingService.currentTheme == 'dark' }" icon="pi pi-pencil" class="p-button-text p-button-rounded"></button>
+</ng-template>
+
+<ng-template #deleteDialogButton>
+	<button pButton pRipple type="button" [ngClass]="{ 'p-button-primary': themingService.currentTheme == 'light', 'p-button-warning': themingService.currentTheme == 'dark' }" icon="pi pi-trash" class="p-button-text p-button-rounded"></button>
+</ng-template>
+<!-- CRUD BOTUNI END-->
+
+<!-- DIALOG START-->
+<p-dialog appendTo="body" [modal]="true" [header]="selectedCategory?.Naziv + ' • ' + ('UNESITE_POTKATEGORIJU' | translate)" [closeOnEscape]="true" [(visible)]="displayAddCategoryDialog" [resizable]="false" [closable]="true">
+	<app-resources-insert-category *ngIf="displayAddCategoryDialog" [PkParentKategorije]="selectedCategory?.PkResursKategorija" (insertSuccess)="onCategoryInsertComplete($event)"></app-resources-insert-category>
+</p-dialog>
+
+<p-dialog appendTo="body" [modal]="true" [header]="selectedCategory?.Naziv + ' • ' + ('UREDITE_KATEGORIJU' | translate)" [closeOnEscape]="true" [(visible)]="displayEditCategoryDialog" [resizable]="false" [closable]="true">
+	<app-resources-edit-category *ngIf="displayEditCategoryDialog" [categoryData]="selectedCategory" [fromDialog]="true" (updateSuccess)="onCategoryUpdateComplete($event)"></app-resources-edit-category>
+</p-dialog>
+
+<p-confirmDialog #cd key="deleteCategory" [breakpoints]="{ '960px': '75vw', '640px': '100vw' }" [style]="{ width: '50vw' }">
+	<ng-template pTemplate="footer">
+		<button type="button" pButton class="p-button-danger" icon="pi pi-check" [label]="'IZBRIŠI' | translate" (click)="cd.accept()"></button>
+		<button type="button" pButton class="p-button-text" icon="pi pi-times" [label]="'NO_TY' | translate" (click)="cd.reject()"></button>
+	</ng-template>
+</p-confirmDialog>
+<!-- DIALOG END-->

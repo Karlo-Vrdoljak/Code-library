@@ -1,0 +1,24 @@
+<div class="flex justify-center ">
+    <div class="flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-800 backdrop-filter backdrop-blur-md dark:bg-opacity-70 p-10">
+        <span *ngIf="insertToCategory" class="flex text-lg mb-3 dark:text-yellow-400  text-indigo-500 font-bold	"> {{ insertToCategory.Naziv }} • {{'UNESITE_POTKATEGORIJU' | translate}}</span>
+        <form class="w-full max-w-lg" [formGroup]="insertForm">
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full  px-3 mb-6 md:mb-2">
+                    <span class="p-float-label w-full">
+                        <input class="w-full" pInputText required type="text" formControlName="Naziv"/>
+                        <label for="input-username">{{ 'NAZIV_POTKATEGORIJE' | translate }}</label>
+                    </span>
+                </div>
+                <div class="w-full  px-3 mb-6 md:mb-2">
+                    <span class="p-float-label w-full">
+                        <textarea class="w-full" pInputText type="text" formControlName="Opis"></textarea>
+                        <label for="input-username">{{ 'OPIS' | translate }}</label>
+                    </span>
+                </div>
+                <div class="w-full px-3 mb-6 md:mb-2">
+                    <button pRipple pButton [label]="'SPREMI' | translate" class="w-full" (click)="insertCategory()" [disabled]="checkValidForm(insertForm)"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<!-- <span style="font-size: 2rem;" class="text-gray-500 dark:text-gray-100 ">EKRAN JE JOS U IZRADI</span> -->
+
+<div *ngIf="renderView" class="w-full text-gray-500 dark:text-gray-100">
+	<app-page-header image="assets/images/megaphone.png" text="DIGITALNABIBLIOTEKA" [breadcrumbs]="resourcesBc">
+		<ng-container [ngTemplateOutlet]="searchForm"></ng-container>
+	</app-page-header>
+
+	<ng-template #searchForm>
+		<div class="flex w-full justify-center">
+			<div class="flex items-center relative justify-between w-full md:w-3/5">
+				<div class="w-full">
+					<form [formGroup]="globalSearchForm" class="w-full">
+						<span class="p-float-label p-input-icon-right w-full">
+							<i [@fadeOutOnLeave] [@fadeInOnEnter] *ngIf="!globalSearchForm?.controls?.search?.value" class="pi pi-search"></i>
+							<input formControlName="search" id="input-search" class="w-full" pInputText type="text" />
+							<label for="input-username"> {{ 'SEARCH' | translate }}</label>
+						</span>
+					</form>
+				</div>
+				<div class="flex right-3 top-1 md:right-4 absolute items-center justify-center">
+					<button [@fadeInOnEnter] [placeholder]="'SEARCH' | translate" [@fadeOutOnLeave] *ngIf="globalSearchForm?.controls?.search?.value" (click)="resetSearch(globalSearchForm)" pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-plain p-button-text"></button>
+				</div>
+			</div>
+			<div *ngIf="false" class="flex flex-col px-4 items-center relative justify-between py-2 md:py-0 w-full md:w-1/4">
+				<div class="w-full h-full flex items-stretch justify-center">
+					<button pRipple pButton class="w-full" icon="pi pi-search-plus" [label]="'ADVANCED_SEARCH' | translate" (click)="openAdvancedSearchForm()"></button>
+				</div>
+			</div>
+		</div>
+	</ng-template>
+	<!-- Lista podkategorija-->
+	<app-resources-category-list [categoryView]="true" [currCategory]="category" (replaceResourcesBcLabelAfterUpdate)="updateResourcesBcLabelOnCategoryUpdate($event)"></app-resources-category-list>
+
+	<!--Lista tema-->
+	<div>
+		<app-resources-post-list [query]="query" [paginator]="paginator" [currCategory]="category" [posts]="posts"></app-resources-post-list>
+	</div>
+</div>

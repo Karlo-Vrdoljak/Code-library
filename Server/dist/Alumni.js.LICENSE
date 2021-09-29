@@ -1,0 +1,613 @@
+/*!********************!*\
+  !*** ./src/api.js ***!
+  \********************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! request */
+
+/*! ./kripto.js */
+
+/*! ./db.js */
+
+/*! ./jwt/jwt */
+
+/*! fs */
+
+/*!***********************************!*\
+  !*** ./src/api/administracija.js ***!
+  \***********************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*!***************************!*\
+  !*** ./src/api/ankete.js ***!
+  \***************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*! rxjs */
+
+/*! ../mail/mail.js */
+
+/*! ../kripto.js */
+
+/*! ../services/ankete.service.js */
+
+/*!**************************!*\
+  !*** ./src/api/forum.js ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*! formidable */
+
+/*! fs-extra */
+
+/*! ../kripto */
+
+/*! uuidv4 */
+
+/*! ../services/profile.service.js */
+
+/*!*******************************!*\
+  !*** ./src/api/obavijesti.js ***!
+  \*******************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*! formidable */
+
+/*! path */
+
+/*! fs-extra */
+
+/*! uuidv4 */
+
+/*! ../mail/mail.js */
+
+/*! rxjs */
+
+/*! process */
+
+/*! ../kripto */
+
+/*!******************************!*\
+  !*** ./src/api/pretplate.js ***!
+  \******************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*!****************************!*\
+  !*** ./src/api/profile.js ***!
+  \****************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*! formidable */
+
+/*! path */
+
+/*! fs-extra */
+
+/*! uuidv4 */
+
+/*! ../kripto */
+
+/*! ../services/profile.service.js */
+
+/*! ../tools */
+
+/*!****************************!*\
+  !*** ./src/api/resursi.js ***!
+  \****************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! tedious */
+
+/*! ../db.js */
+
+/*! ../services/app.service */
+
+/*! formidable */
+
+/*! path */
+
+/*! fs-extra */
+
+/*! ../kripto */
+
+/*! uuidv4 */
+
+/*! ../services/profile.service.js */
+
+/*!*********************************!*\
+  !*** ./src/config/appConfig.js ***!
+  \*********************************/
+
+/*! no static exports found */
+
+/*! app-root-path */
+
+/*! fs */
+
+/*!*******************!*\
+  !*** ./src/db.js ***!
+  \*******************/
+
+/*! no static exports found */
+
+/*! ./kripto.js */
+
+/*! tedious-connection-pool */
+
+/*! tedious */
+
+/*! tedious */
+
+/*! tedious */
+
+/*! tedious */
+
+/*!******************************!*\
+  !*** ./src/error.handler.js ***!
+  \******************************/
+
+/*! no static exports found */
+
+/*! process */
+
+/*!************************!*\
+  !*** ./src/jwt/jwt.js ***!
+  \************************/
+
+/*! no static exports found */
+
+/*! jsonwebtoken */
+
+/*! express-jwt */
+
+/*! ../kripto.js */
+
+/*!*****************************!*\
+  !*** ./src/jwt/security.js ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*! express */
+
+/*! request */
+
+/*! ../kripto.js */
+
+/*! ../db.js */
+
+/*! ./jwt */
+
+/*! tedious */
+
+/*! ../kripto */
+
+/*! fs */
+
+/*! activedirectory2 */
+
+/*! axios */
+
+/*! rxjs */
+
+/*! uuidv4 */
+
+/*! ../mail/mail */
+
+/*! ../services/app.service.js */
+
+/*! ../services/profile.service.js */
+
+/*!***********************!*\
+  !*** ./src/kripto.js ***!
+  \***********************/
+
+/*! no static exports found */
+
+/*! crypto */
+
+/*!***********************************************!*\
+  !*** ./src/mail/emails/sendAnketaLinkMail.js ***!
+  \***********************************************/
+
+/*! no static exports found */
+
+/*! ../mailService */
+
+/*! path */
+
+/*!**************************************************!*\
+  !*** ./src/mail/emails/sendObavijestLinkMail.js ***!
+  \**************************************************/
+
+/*! no static exports found */
+
+/*! ../mailService */
+
+/*! path */
+
+/*!**********************************************!*\
+  !*** ./src/mail/emails/sendPassResetMail.js ***!
+  \**********************************************/
+
+/*! no static exports found */
+
+/*! path */
+
+/*! ../mailService */
+
+/*!*************************************************!*\
+  !*** ./src/mail/emails/sendRegistrationMail.js ***!
+  \*************************************************/
+
+/*! no static exports found */
+
+/*! ../mailService */
+
+/*! path */
+
+/*!*****************************!*\
+  !*** ./src/mail/i18n/en.js ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!*****************************!*\
+  !*** ./src/mail/i18n/hr.js ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** ./src/mail/mail.js ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*! ./emails/sendRegistrationMail */
+
+/*! ./emails/sendPassResetMail */
+
+/*! ./emails/sendAnketaLinkMail */
+
+/*! ./emails/sendObavijestLinkMail */
+
+/*!*********************************!*\
+  !*** ./src/mail/mailService.js ***!
+  \*********************************/
+
+/*! no static exports found */
+
+/*! nodemailer */
+
+/*! handlebars */
+
+/*! fs */
+
+/*! path */
+
+/*! ./i18n/hr */
+
+/*! ./i18n/en */
+
+/*!***********************!*\
+  !*** ./src/server.js ***!
+  \***********************/
+
+/*! no static exports found */
+
+/*! ./config/appConfig.js */
+
+/*! body-parser */
+
+/*! helmet */
+
+/*! morgan */
+
+/*! ./kripto.js */
+
+/*! express */
+
+/*! express */
+
+/*! path */
+
+/*! ./jwt/jwt */
+
+/*! ./error.handler */
+
+/*! ./services/app.service */
+
+/*! ./winston */
+
+/*! ./api/pretplate */
+
+/*! ./jwt/security */
+
+/*! ./api/obavijesti */
+
+/*! ./api/profile */
+
+/*! ./api/forum */
+
+/*! ./api/resursi */
+
+/*! ./api/ankete */
+
+/*! ./api/administracija */
+
+/*! ./api */
+
+/*! ./services/google.oauth2.service */
+
+/*!****************************************!*\
+  !*** ./src/services/ankete.service.js ***!
+  \****************************************/
+
+/*! no static exports found */
+
+/*! tedious */
+
+/*! ./app.service */
+
+/*!*************************************!*\
+  !*** ./src/services/app.service.js ***!
+  \*************************************/
+
+/*! no static exports found */
+
+/*! axios */
+
+/*! path */
+
+/*! fs */
+
+/*! ../kripto */
+
+/*! rxjs */
+
+/*!***********************************************!*\
+  !*** ./src/services/google.oauth2.service.js ***!
+  \***********************************************/
+
+/*! no static exports found */
+
+/*! googleapis */
+
+/*! axios */
+
+/*! express */
+
+/*!*****************************************!*\
+  !*** ./src/services/profile.service.js ***!
+  \*****************************************/
+
+/*! no static exports found */
+
+/*! ../db.js */
+
+/*! tedious */
+
+/*! ./app.service.js */
+
+/*!**********************!*\
+  !*** ./src/tools.js ***!
+  \**********************/
+
+/*! no static exports found */
+
+/*! fs */
+
+/*!************************!*\
+  !*** ./src/winston.js ***!
+  \************************/
+
+/*! no static exports found */
+
+/*! winston */
+
+/*! winston */
+
+/*!***********************************!*\
+  !*** external "activedirectory2" ***!
+  \***********************************/
+
+/*! no static exports found */
+
+/*!********************************!*\
+  !*** external "app-root-path" ***!
+  \********************************/
+
+/*! no static exports found */
+
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+
+/*! no static exports found */
+
+/*!******************************!*\
+  !*** external "body-parser" ***!
+  \******************************/
+
+/*! no static exports found */
+
+/*!*************************!*\
+  !*** external "crypto" ***!
+  \*************************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** external "express" ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*!******************************!*\
+  !*** external "express-jwt" ***!
+  \******************************/
+
+/*! no static exports found */
+
+/*!*****************************!*\
+  !*** external "formidable" ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+
+/*! no static exports found */
+
+/*!***************************!*\
+  !*** external "fs-extra" ***!
+  \***************************/
+
+/*! no static exports found */
+
+/*!*****************************!*\
+  !*** external "googleapis" ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!*****************************!*\
+  !*** external "handlebars" ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!*************************!*\
+  !*** external "helmet" ***!
+  \*************************/
+
+/*! no static exports found */
+
+/*!*******************************!*\
+  !*** external "jsonwebtoken" ***!
+  \*******************************/
+
+/*! no static exports found */
+
+/*!*************************!*\
+  !*** external "morgan" ***!
+  \*************************/
+
+/*! no static exports found */
+
+/*!*****************************!*\
+  !*** external "nodemailer" ***!
+  \*****************************/
+
+/*! no static exports found */
+
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** external "process" ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** external "request" ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*!***********************!*\
+  !*** external "rxjs" ***!
+  \***********************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** external "tedious" ***!
+  \**************************/
+
+/*! no static exports found */
+
+/*!******************************************!*\
+  !*** external "tedious-connection-pool" ***!
+  \******************************************/
+
+/*! no static exports found */
+
+/*!*************************!*\
+  !*** external "uuidv4" ***!
+  \*************************/
+
+/*! no static exports found */
+
+/*!**************************!*\
+  !*** external "winston" ***!
+  \**************************/
+
+/*! no static exports found */

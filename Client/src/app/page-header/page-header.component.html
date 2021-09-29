@@ -1,0 +1,31 @@
+<div class="w-full bg-white bg-opacity-85 dark:bg-gray-800 backdrop-filter backdrop-blur-md dark:bg-opacity-70 shadow-sm md:py-4">
+	<div class="items-center flex flex-row p-4 md:text-left justify-between md:px-8">
+		<div class="flex-flex-col flex-wrap" [ngClass]="{ 'w-3/4 md:w-2/3': image }">
+			<div *ngIf="text" class="text-3xl md:text-4xl font-semibold tracking-wider text-indigo-800 dark:text-indigo-300">{{ text | translate }}</div>
+			<div class="flex flex-wrap break-words font-semibold text-sm md:text-base text-gray-800 dark:text-indigo-400">
+				<ng-container *ngFor="let crumb of breadcrumbs; last as isLast">
+					<div>
+						<ng-container *ngIf="isLast == false" [ngTemplateOutlet]="crumbWithLinkRef" [ngTemplateOutletContext]="{ crumb: crumb, isLast: isLast }"></ng-container>
+						<ng-container *ngIf="isLast == true" [ngTemplateOutlet]="breadcrumbRef" [ngTemplateOutletContext]="{ crumb: crumb, isLast: isLast }"></ng-container>
+					</div>
+				</ng-container>
+			</div>
+		</div>
+		<div *ngIf="image" class="md:mt-0 md:ml-2 flex justify-end w-1/4 md:w-1/3 lg:w-48">
+			<div><img [default]="true" [src]="image" class="w-16 md:w-20 lg:w-22 dark:opacity-80 select-none" alt="" /></div>
+		</div>
+	</div>
+	<div class="items-center flex flex-row p-4 md:text-left justify-between md:px-8"><ng-content></ng-content></div>
+</div>
+
+<ng-template #crumbWithLinkRef let-crumb="crumb" let-isLast="isLast">
+	<a [routerLink]="makeLink(crumb)">
+		<ng-container [ngTemplateOutlet]="breadcrumbRef" [ngTemplateOutletContext]="{ crumb: crumb, isLast: isLast }"></ng-container>
+	</a>
+</ng-template>
+<ng-template #breadcrumbRef let-crumb="crumb" let-isLast="isLast">
+	<div class="flex flex-row">
+		<div class="pr-1 tracking-wider" [ngClass]="{ 'text-indigo-600 dark:text-indigo-200': isLast == false }">{{ crumb.noTranslate ? crumb.label : (crumb.label | translate) }}</div>
+		<div *ngIf="isLast == false" class="pr-1">/</div>
+	</div>
+</ng-template>

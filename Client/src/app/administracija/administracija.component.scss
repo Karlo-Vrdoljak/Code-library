@@ -1,0 +1,31 @@
+:host ::ng-deep {
+    .p-datatable .p-datatable-thead {
+        border-top: 1px solid #404040;
+    }
+
+    .p-datatable .p-datatable-thead > tr > th {
+        background-color: transparent;
+        text-align: center;
+        padding: 0.75rem 0.25rem;
+    }
+
+    .p-datatable .p-datatable-tbody > tr > td {
+        text-align: center;
+        border: none;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .p-dropdown {
+        display: flex;
+        height: 30px;
+        align-items: center;
+        background-color: transparent !important;
+        background-image: unset !important;
+    }
+
+    .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon.pi-check:before {
+        top: 8px;
+        left: 2px;
+    }
+}

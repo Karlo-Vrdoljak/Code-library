@@ -1,0 +1,40 @@
+
+.chart-legend .legend-label, .chart-legend .legend-label .legend-label-text {
+  transition: all 0.15s;
+  font-size: 1rem !important;
+  color: var(--indigo-800);
+} 
+.chart-legend .legend-label:hover, .chart-legend .legend-label .active .legend-label-text {
+  color: var(--indigo-900);
+}
+
+.chart-legend .legend-labels {
+  background: var(--bluegray-100)!important;
+  overflow-x: auto;
+}
+
+.pie-label {
+  font-size: 0.875rem!important;
+  fill: var(--indigo-800)!important;
+}
+
+.dark {
+  .pie-label{
+    font-size: 0.875rem!important;
+    fill: var(--indigo-100)!important;
+
+  }
+  .chart-legend .legend-label:hover , .chart-legend .legend-label .active .legend-label-text{
+    color: var(--indigo-400);
+  }
+  .chart-legend .legend-labels {
+    background: var(--bg-content)!important;
+    overflow-x: auto;
+  }
+  
+  .chart-legend .legend-label, .chart-legend .legend-label .legend-label-text {
+    transition: all 0.15s;
+    font-size: 1rem !important;
+    color: var(--indigo-200);
+  } 
+}
